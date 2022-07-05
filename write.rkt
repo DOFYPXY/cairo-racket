@@ -1,0 +1,38 @@
+#lang racket
+
+(require "trace-entry.rkt")
+
+(provide write-mem write-trace)
+
+(define (write-mem mem)
+  (displayln "Memory: ")
+  (for ([i (in-range 1 (vector-length mem))])
+    (display i)
+    (display "  ")
+    (displayln (vector-ref mem i))))
+
+(define (write-trace trace)
+  (displayln "Trace: ")
+  ;   (let ([n (vector-length trace)])
+  ;     (for ([i (in-range n)])
+  ;       (let ([item (vector-ref trace (- n (add1 i)))])
+  ;         (display "pc: ")
+  ;         (display traceentry-pc item)
+  ;         (display ", ap: ")
+  ;         (display traceentry-ap item)
+  ;         (display ", fp: ")
+  ;         (displayln traceentry-fp item))
+  ;       )
+  ;     )
+
+  (let ([ls (reverse trace)])
+    (for ([item trace])
+      (display "pc: ")
+      (display (traceentry-pc item))
+      (display ", ap: ")
+      (display (traceentry-ap item))
+      (display ", fp: ")
+      (displayln (traceentry-fp item))
+      )
+    )
+  )
